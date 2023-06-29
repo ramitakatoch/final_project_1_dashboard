@@ -1,0 +1,37 @@
+{
+  "name": "final_project_1_dashboard",
+  "version": "1.0.0",
+  "description": "This is My Final Node Project Admin Dashboard",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramitakatoch/final_project_1_dashboard.git"
+  },
+  "keywords": [
+    "Admin",
+    "Dashboard",
+    "Final",
+    "Project"
+  ],
+  "author": "Ramita Katoch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramitakatoch/final_project_1_dashboard/issues"
+  },
+  "homepage": "https://github.com/ramitakatoch/final_project_1_dashboard#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^7.3.1",
+    "morgan": "^1.10.0"
+  }
+}
