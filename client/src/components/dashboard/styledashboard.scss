@@ -1,0 +1,13 @@
+.adminsidebar{
+    height: 100vh !important;
+
+    .nav-item{
+
+        &:hover{
+            background-color: #fff;
+            .nav-link{
+                color: black !important;
+            }
+        }
+    }
+}
