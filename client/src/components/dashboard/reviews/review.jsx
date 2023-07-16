@@ -2,54 +2,36 @@ import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import AdminNavbar from '../adminNavbar'
 import Table from 'react-bootstrap/Table';
-import {reviewObject} from '../../dataset'
+import { reviewObject } from '../../dataset'
+import ReviewForm from './reviewform';
+
 
 
 const Category = () => {
-  return (
-    <>
-      <Container fluid>
-        <Row>
-            <AdminNavbar />
-            <Col lg='10' md='10' sm='8' xs='8'> 
-                <h1 className='border-bottom'>Review</h1>
-                <hr />  
-                <Table striped hover responsive>
-                    <thead>
-                        <tr>
-                        <th>S.No</th>
-                        <th>customerId</th>
-                        <th>productId</th>
-                        <th>quantity</th>
-                        <th>orderedOn</th>
-                        <th>transactionId</th>
-                        <th>actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {reviewObject.map((i,j) => {
-                            return (
-                                <>
-                                    <tr key={i.id}>
-                                        <th scope="row">{j+1}</th>
-                                        <td>{i.customerId}</td>
-                                        <td>{i.productId}</td>
-                                        <td>{i.quantity}</td>
-                                        <td>{i.orderedOn}</td>
-                                        <td>{i.transactionId}</td>
-                                        <td>{i.actions}</td>
-                                    </tr>
-                                </>
-                            )
+    return (
+        <>
+            <Container fluid>
+                <Row>
+                    <Col className='offset-2'>
+                        <Container fluid>
+                            <Row>
+                                <AdminNavbar />
+                                <Col lg='12' md='12' sm='12' className='text-center py-5 bg-success text-white'>
+                                    <h1>Customers Reviews</h1>
+                                </Col>
+                            </Row>
+                            <Row className='m-5'>
+                                <Col lg='12' md='12' sm='12'>
+                                    <ReviewForm />
+                                </Col>
 
-                        })}
-                    </tbody>
-                </Table>
-            </Col>
-        </Row>
-      </Container>
-    </>
-  )
+                            </Row>
+                        </Container>
+                    </Col>
+                </Row>
+            </Container>
+        </>
+    )
 }
 
 export default Category

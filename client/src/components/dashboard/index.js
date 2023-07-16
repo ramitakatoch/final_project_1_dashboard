@@ -4,6 +4,7 @@ import AdminNavbar from './adminNavbar'
 
 import './styledashboard.scss'
 import AdminDashboard from './adminDashboard'
+import Admindash from './admindash'
 
 
 const Dashboard = () => {
@@ -13,6 +14,7 @@ const Dashboard = () => {
         <Row>
           <AdminNavbar />
           <AdminDashboard />
+          {/* <Admindash /> */}
         </Row>
       </Container>
     </>
