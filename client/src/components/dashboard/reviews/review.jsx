@@ -24,7 +24,6 @@ const Category = () => {
                                 <Col lg='12' md='12' sm='12'>
                                     <ReviewForm />
                                 </Col>
-
                             </Row>
                         </Container>
                     </Col>
