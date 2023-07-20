@@ -5,9 +5,9 @@ var customerschema = new mongoose.Schema({
     lastName:{ type:String, required:true},
     email:{ type:String, required:true, unique:true },
     contact:{ type:String, required:true},
-    address: String, 
-    createdOn: { type: Date, required: true, default: Date.now },
-    status: String
+    address: { type: String, },
+    createdOn:{ type:Date, required:true, unique:true, default: Date.now },
+    status: {type: Boolean, default: false},
     
 })
 

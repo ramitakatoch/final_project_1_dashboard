@@ -6,7 +6,7 @@ var reviewschema = new mongoose.Schema({
     lastName:{ type:String, required:true},
     email:{ type:String, required:true, unique:true},
     message:{ type:String, required:true },
-    status:{ type: Boolean}
+    status: {type: Boolean, default: false}
     
 })
 
