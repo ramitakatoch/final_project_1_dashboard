@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Button, Modal, Form } from 'react-bootstrap';
 // import { useForm } from 'react-hook-form'
 
+import axios from 'axios'
+
 import { useNavigate } from 'react-router-dom';
 
 export default function AddNewCustomer(props) {
     let navigate = useNavigate();
-    const intialValues = { firstName: "", lastName: "", email: "", contact: "", address: "" };
+    const intialValues = { firstName: "", lastName: "", email: "", contact: "", address: "" ,status:false};
 
     const [formValues, setFormValues] = useState(intialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -14,6 +16,14 @@ export default function AddNewCustomer(props) {
 
     const submit = () => {
         console.log(formValues);
+
+        axios.post("http://localhost:5000/api/customer",JSON.stringify(formValues),{headers:{"Content-Type" : "application/json"}}).then((response) => {
+            alert('Customer Added Successfully!');
+            props.onHide(true)
+            navigate('/customer')
+        }).catch((err) => {
+            alert(err.response.data);
+        })
     };
 
     //input change handler
