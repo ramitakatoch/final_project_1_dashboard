@@ -8,10 +8,20 @@ import AddNewCustomer from './addNewCustomer';
 
 
 const Customer = () => {
+    const [customerObject, setcustomerObject] = useState([])
     const [modalShow, setModalShow] = useState(false);
 
+    const getCustomerObject = async ()=>{
+        const response = await fetch("http://localhost:5000/api/customer").then(
+            (response) => response.json()
+        )
+        setcustomerObject(response)
+    }
+
     useEffect(() => {
+        getCustomerObject()
     }, [])
+
     return (
         <>
             <Container fluid>
@@ -44,8 +54,7 @@ const Customer = () => {
                                             {customerObject.map((i, j) => {
                                                 return (
                                                     <>
-                                                        <tr key={i.id}></tr>
-                                                        <tr key={i.id}>
+                                                        <tr key={i._id}>
                                                             <th scope="row">{j + 1}</th>
                                                             <td>{i.firstName}</td>
                                                             <td>{i.lastName}</td>
@@ -53,8 +62,8 @@ const Customer = () => {
                                                             <td>{i.contact}</td>
                                                             <td>{i.address}</td>
                                                             <td>{i.createdOn}</td>
-                                                            <td>{i.status}</td>
-                                                            <td>{i.actions}</td>
+                                                            <td>{(i.status).toString()}</td>
+                                                            {/* <td>{i.actions}</td> */}
                                                         </tr>
                                                     </>
                                                 )

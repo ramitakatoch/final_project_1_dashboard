@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Button, Modal, Form } from 'react-bootstrap';
 // import { useForm } from 'react-hook-form'
 
+import axios from 'axios'
+
 import { useNavigate } from 'react-router-dom';
 
 export default function AddNewProduct(props) {
     let navigate = useNavigate();
-    const intialValues = { productName: "", productPrice: "", manufacture: "", quantity: "" };
+    const intialValues = { productName: "", productPrice: "", manufacturer: "", quantity: "" };
 
     const [formValues, setFormValues] = useState(intialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -14,6 +16,14 @@ export default function AddNewProduct(props) {
 
     const submit = () => {
         console.log(formValues);
+
+        axios.post("http://localhost:5000/api/product",JSON.stringify(formValues),{headers:{"Content-Type" : "application/json"}}).then((response) =>{
+            alert('Product Added Successfully!');
+            props.onHide(true)
+            navigate('/product')
+        }).catch((err) =>{
+            alert(err.response.data)
+        })
     };
 
     //input change handler
@@ -35,7 +45,7 @@ export default function AddNewProduct(props) {
 
         const productNameRegex = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i
         const productPriceRegex = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i
-        const manufactureRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        const manufacturerRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
         const quantityRegex = /^[0]?[6789]\d{9}$/
        
 
@@ -53,9 +63,9 @@ export default function AddNewProduct(props) {
             errors.email = "Invalid format";
         }
 
-        if (!values.manufacture) {
-            errors.manufacture = "Cannot be blank";
-        } else if (!manufactureRegex.test(values.manufacture)) {
+        if (!values.manufacturer) {
+            errors.manufacturer = "Cannot be blank";
+        } else if (!manufacturerRegex.test(values.manufacturer)) {
             errors.email = "Invalid format";
         }
 
@@ -88,7 +98,7 @@ export default function AddNewProduct(props) {
                         <Form.Group className="mb-3" controlId="addProduct.ControlInput1">
                             <Form.Label>productName</Form.Label>
                             <Form.Control type="text" name="productName" placeholder="James" value={formValues.productName} onChange={handleChange} className={formErrors.productName && "input-error"} />
-                            {formErrors.productNameName && (<span className="error text-danger">{formErrors.productName}</span>)}
+                            {formErrors.productName && (<span className="error text-danger">{formErrors.productName}</span>)}
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="addProduct.ControlInput2">
@@ -98,9 +108,9 @@ export default function AddNewProduct(props) {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="addProduct.ControlInput3">
-                            <Form.Label>manufacture</Form.Label>
-                            <Form.Control type="email" name="manufacture" placeholder="bajaj" value={formValues.manufacture} onChange={handleChange} className={formErrors.manufacture && "input-error"} />
-                            {formErrors.manufacture && (<span className="error text-danger">{formErrors.manufacture}</span>)}
+                            <Form.Label>manufacturer</Form.Label>
+                            <Form.Control type="email" name="manufacturer" placeholder="bajaj" value={formValues.manufacturer} onChange={handleChange} className={formErrors.manufacturer && "input-error"} />
+                            {formErrors.manufacturer && (<span className="error text-danger">{formErrors.manufacturer}</span>)}
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="addProduct.ControlInput4">

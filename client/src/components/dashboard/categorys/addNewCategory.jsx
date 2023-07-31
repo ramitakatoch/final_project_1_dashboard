@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Button, Modal, Form, FormGroup } from 'react-bootstrap';
 
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 export default function AddNewCategory(props) {
     let navigate = useNavigate();
-    const intialValues = { categoryName: "", status: "" };
+    const intialValues = { categoryName: "", createdBy:"Ramsi",  status:"" };
 
     const [formValues, setFormValues] = useState(intialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -14,12 +15,21 @@ export default function AddNewCategory(props) {
     const submit = () => {
         console.log(formValues);
 
+        axios.post("http://localhost:5000/api/category",JSON.stringify(formValues),{headers:{"Content-Type" : "application/json"}}).then((response) => {
+            alert('Category Added Successfully!');
+            props.onHide(true)
+            navigate('/category')
+        }).catch((err) => {
+            alert(err.response.data);
+        })
+
     };
 
     //input change handler
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
+        console.log(formValues)
     };
 
     //form submission handler
@@ -41,6 +51,11 @@ export default function AddNewCategory(props) {
             errors.categoryName = "Category Name must be more than 1 character";
         } else if (!categoryNameRegex.test(values.categoryName)) {
             errors.email = "Invalid Name format";
+        }
+
+
+        if(!values.status){
+            errors.status = "must  select a stutus";
         }
 
         return errors;
@@ -71,8 +86,8 @@ export default function AddNewCategory(props) {
                         </Form.Group>
                         <Form.Group className='mb-3' controlId='addCategory.ControlInput2'>
                             <Form.Label>Status</Form.Label>
-                            <Form.Check type="radio" label="Active" id="ActiveStatus" />
-                            <Form.Check type="radio" label="InActive" id="InActiveStatus" />
+                            <Form.Check type="radio" label="Active" value="true" name="status" id="ActiveStatus" />
+                            <Form.Check type="radio" label="InActive" value="false" name="status" id="InActiveStatus" />
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>

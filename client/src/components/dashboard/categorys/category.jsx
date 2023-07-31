@@ -8,13 +8,22 @@ import AddNewCategory from './addNewCategory'
 
 
 const Category = () => {
-    // const [categoryObject, setCategoryObject] = useState([categoryObject])
+    const [categoryObject, setcategoryObject] = useState([])
     const [modalShow, setModalShow] = useState(false);
+
+    const getCategoryObject = async ()=>{
+        const response = await fetch("http://localhost:5000/api/category").then(
+            (response) => response.json()
+        )
+        setcategoryObject(response)
+    }
 
 
 
     useEffect(() => {
+        getCategoryObject()
     }, [])
+
     return (
         <>
             <Container fluid>
@@ -44,13 +53,13 @@ const Category = () => {
                                             {categoryObject.map((i, j) => {
                                                 return (
                                                     <>
-                                                        <tr key={i.id}>
+                                                        <tr key={i._id}>
                                                             <th scope="row">{j + 1}</th>
                                                             <td>{i.categoryName}</td>
                                                             <td>{i.createdBy}</td>
                                                             <td>{i.createdOn}</td>
-                                                            <td>{i.status}</td>
-                                                            <td>{i.actions}</td>
+                                                            <td>{(i.status).toString()}</td>
+                                                            {/* <td>{i.actions}</td> */}
                                                         </tr>
                                                     </>
                                                 )

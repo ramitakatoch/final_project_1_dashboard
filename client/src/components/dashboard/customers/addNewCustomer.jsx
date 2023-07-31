@@ -16,6 +16,7 @@ export default function AddNewCustomer(props) {
 
     const submit = () => {
         console.log(formValues);
+        debugger;
 
         axios.post("http://localhost:5000/api/customer",JSON.stringify(formValues),{headers:{"Content-Type" : "application/json"}}).then((response) => {
             alert('Customer Added Successfully!');

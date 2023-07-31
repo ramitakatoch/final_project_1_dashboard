@@ -8,9 +8,18 @@ import AddNewProduct from './addNewProduct'
 
 
 const Product = () => {
+    const [productObject, setproductObject] = useState([])
     const [modalShow, setModalShow] = useState(false);
 
+    const getProductObject = async ()=>{
+        const response = await fetch("http://localhost:5000/api/product").then(
+            (response) => response.json()
+        )
+        setproductObject(response)
+    }
+
     useEffect(() => {
+        getProductObject()
     }, [])
     return (
         <>
@@ -32,7 +41,7 @@ const Product = () => {
                                                 <th>S.No</th>
                                                 <th>productName</th>
                                                 <th>productPrice</th>
-                                                <th>manufacture</th>
+                                                <th>manufacturer</th>
                                                 <th>quantity</th>
                                                 <th>updatedOn</th>
                                                 <th>actions</th>
@@ -46,10 +55,10 @@ const Product = () => {
                                                             <th scope="row">{j + 1}</th>
                                                             <td>{i.productName}</td>
                                                             <td>{i.productPrice}</td>
-                                                            <td>{i.manufacture}</td>
+                                                            <td>{i.manufacturer}</td>
                                                             <td>{i.quantity}</td>
                                                             <td>{i.updatedOn}</td>
-                                                            <td>{i.actions}</td>
+                                                            {/* <td>{i.actions}</td> */}
                                                         </tr>
                                                     </>
                                                 )
